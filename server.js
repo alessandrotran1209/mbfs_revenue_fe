@@ -12,6 +12,6 @@ function requireHTTPS(req, res, next) {
   app.use(requireHTTPS);
   app.use(express.static("./dist/mbfs-revenue-tracking-system-fe"));
   
-  app.get("/*", (req, res) => res.sendFile("index.html", { root: "dist/QLCV/" }));
+  app.get("/*", (req, res) => res.sendFile("index.html", { root: "dist/mbfs-revenue-tracking-system-fe/" }));
   
   app.listen(process.env.PORT || 8080);
