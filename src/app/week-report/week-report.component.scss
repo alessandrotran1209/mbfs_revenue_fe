@@ -15,3 +15,15 @@ table {
   .demo-row-is-clicked {
     font-weight: bold;
   }
+
+.cdk-column-revenue_target,
+.cdk-column-week0,  
+.cdk-column-week1,  
+.cdk-column-week2,  
+.cdk-column-week3,  
+.cdk-column-week4,
+.cdk-column-complete_rate  
+{
+    flex: none;
+    width: 6vw;
+}

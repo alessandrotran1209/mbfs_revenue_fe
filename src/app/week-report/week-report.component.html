@@ -1,0 +1,55 @@
+<h1>BÁO CÁO DOANH THU</h1>
+<mat-tab-group>
+  <mat-tab
+    *ngFor="let branch of branches; index as i"
+    [label]="getBranch(branch)"
+  >
+    <div *ngFor="let d of ds; index as i">
+      <mat-accordion>
+        <mat-expansion-panel
+          (opened)="panelOpenState[i] = true; populateDataFromSource(i)"
+          (closed)="panelOpenState[i] = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> Doanh thu {{ d.title }} </mat-panel-title>
+            <!-- <mat-panel-description>
+              Currently I am {{ panelOpenState ? "open" : "closed" }}
+            </mat-panel-description> -->
+          </mat-expansion-panel-header>
+          <table
+            mat-table
+            [dataSource]="d.data"
+            class="mat-elevation-z8 demo-table"
+          >
+            <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+            <ng-container
+              *ngFor="let column of columns"
+              [cdkColumnDef]="column.columnDef"
+            >
+              <mat-header-cell *cdkHeaderCellDef>{{
+                column.header
+              }}</mat-header-cell>
+              <mat-cell *cdkCellDef="let row">{{ column.cell(row) }}</mat-cell>
+            </ng-container>
+
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns"
+            ></mat-header-row>
+            <!-- <mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="clickedRows[i].add(row)"
+          [class.demo-row-is-clicked]="clickedRows[i].has(row)"
+        ></mat-row> -->
+            <mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              (click)="openEditDialog(row, i)"
+            ></mat-row>
+          </table>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-tab>
+</mat-tab-group>

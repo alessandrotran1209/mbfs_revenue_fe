@@ -1,0 +1,30 @@
+<div class="dialog-header">
+  <div class="row">
+    <div class="col-sm-6"><h2 mat-dialog-title>Thêm mới</h2></div>
+    <div class="col-1 offset-sm-5">
+      <button mat-icon-button class="button-close" (click)="onNoClick('')">
+        <span class="material-symbols-outlined"> close </span>
+      </button>
+    </div>
+  </div>
+</div>
+<div mat-dialog-content>
+  <form [formGroup]="insertForm" (ngSubmit)="onFormSubmit()">
+    <div class="row">
+      <div class="col" *ngFor="let key of getRowWeekKeys()">
+        <div class="info-field">
+          <div class="info-title">{{ headerViewValue[key] }}</div>
+          <div class="info-detail">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ headerViewValue[key] }}</mat-label>
+              <input type="number" matInput [formControlName]="key" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <button mat-raised-button color="accent">Cập nhật</button>
+      </div>
+    </div>
+  </form>
+</div>

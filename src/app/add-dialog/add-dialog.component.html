@@ -1,0 +1,140 @@
+<div class="dialog-header">
+  <div class="row">
+    <div class="col-sm-6"><h2 mat-dialog-title>Thêm mới</h2></div>
+    <div class="col-1 offset-sm-5">
+      <button mat-icon-button class="button-close" (click)="onNoClick('')">
+        <span class="material-symbols-outlined"> close </span>
+      </button>
+    </div>
+  </div>
+</div>
+<div mat-dialog-content>
+  <form [formGroup]="insertForm" (ngSubmit)="onFormSubmit()">
+    <div class="row">
+      <div class="col">
+        <div class="info-field">
+          <div class="info-title">Tháng</div>
+          <div class="info-detail">
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                [matDatepicker]="dp"
+                [formControl]="date"
+                (focus)="dp.open()"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dp"
+              ></mat-datepicker-toggle>
+              <mat-datepicker
+                #dp
+                startView="multi-year"
+                (yearSelected)="chosenYearHandler($event)"
+                (monthSelected)="chosenMonthHandler($event, dp)"
+                panelClass="example-month-picker"
+              >
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="info-field">
+          <div class="info-title">Hạng mục</div>
+          <div class="info-detail">
+            <mat-form-field appearance="outline">
+              <mat-label>Hạng mục</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="revenue_category"
+                [matAutocomplete]="auto"
+              />
+              <mat-autocomplete
+                #auto="matAutocomplete"
+                (optionSelected)="
+                  processSubCategorySuggestions($event.option.value)
+                "
+              >
+                <mat-option
+                  *ngFor="let option of filteredOptions | async"
+                  [value]="option"
+                >
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="info-field">
+          <div class="info-title">Dịch vụ</div>
+          <div class="info-detail">
+            <mat-form-field appearance="outline">
+              <mat-label>Dịch vụ</mat-label>
+              <input
+                type="text"
+                name="revenue_subcategory"
+                matInput
+                formControlName="revenue_subcategory"
+                [matAutocomplete]="subcategory"
+              />
+              <mat-autocomplete
+                #subcategory="matAutocomplete"
+                (optionSelected)="processDetailSuggestions($event.option.value)"
+              >
+                <mat-option
+                  *ngFor="let option of filteredSubcategoryOptions | async"
+                  [value]="option"
+                >
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="info-field">
+          <div class="info-title">Chi tiết</div>
+          <div class="info-detail">
+            <mat-form-field appearance="outline">
+              <mat-label>Chi tiết</mat-label>
+              <input
+                type="text"
+                name="revenue_detail"
+                matInput
+                formControlName="revenue_detail"
+                [matAutocomplete]="detail"
+              />
+              <mat-autocomplete #detail="matAutocomplete">
+                <mat-option
+                  *ngFor="let option of filteredDetailOptions | async"
+                  [value]="option"
+                >
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="info-field">
+          <div class="info-title">Kế hoạch</div>
+          <div class="info-detail">
+            <mat-form-field appearance="outline">
+              <mat-label>Kế hoạch</mat-label>
+              <input type="number" matInput formControlName="value" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <button mat-raised-button color="accent">Thêm mới</button>
+      </div>
+    </div>
+  </form>
+</div>
