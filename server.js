@@ -10,7 +10,7 @@ function requireHTTPS(req, res, next) {
   const app = express();
   
   app.use(requireHTTPS);
-  app.use(express.static("./dist/QLCV"));
+  app.use(express.static("./dist/mbfs-revenue-tracking-system-fe"));
   
   app.get("/*", (req, res) => res.sendFile("index.html", { root: "dist/QLCV/" }));
   
