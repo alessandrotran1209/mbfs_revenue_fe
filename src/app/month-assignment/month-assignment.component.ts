@@ -28,7 +28,7 @@ export class MonthAssignmentComponent implements OnInit {
     this.ds = [
       { title: 'Trong Mobifone', data: [] },
       { title: 'Ngoài Mobifone', data: [] },
-      { title: 'Đổi mới', data: [] },
+      { title: 'Dự án và các nguồn DT khác', data: [] },
     ];
 
     for (let i = 0; i < this.ds.length; i++) {
