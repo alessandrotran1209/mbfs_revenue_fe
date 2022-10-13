@@ -1,0 +1,113 @@
+<div class="hold-transition login-page">
+  <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center">
+        <img src="../assets/MFS.png" alt="" />
+      </div>
+      <div class="card-body">
+        <p class="login-box-msg">Đổi mật khẩu</p>
+
+        <form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="input-group mb-3">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Mật khẩu cũ"
+              formControlName="password"
+            />
+          </div>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="
+              form.controls['password'].touched &&
+              form.controls['password'].errors
+            "
+          >
+            <div *ngIf="form.controls['password'].hasError('required')">
+              Mật khẩu không được để trống
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="password"
+              name="confirmPassword"
+              class="form-control"
+              placeholder="Mật khẩu mới"
+              formControlName="confirmPassword"
+            />
+          </div>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="
+              form.controls['confirmPassword'].touched &&
+              form.controls['confirmPassword'].errors
+            "
+          >
+            <div *ngIf="form.controls['confirmPassword'].hasError('required')">
+              Mật khẩu không được để trống
+            </div>
+            <div *ngIf="form.controls['confirmPassword'].hasError('minlength')">
+              Mật khẩu phải chứa ít nhất 8 kí tự
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="password"
+              class="form-control"
+              name="reconfirmPassword"
+              placeholder="Nhập lại mật khẩu mới"
+              formControlName="reconfirmPassword"
+            />
+          </div>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="
+              form.controls['reconfirmPassword'].touched &&
+              form.controls['reconfirmPassword'].errors
+            "
+          >
+            <div
+              *ngIf="form.controls['reconfirmPassword'].hasError('required')"
+            >
+              Mật khẩu không được để trống
+            </div>
+            <div
+              *ngIf="form.controls['reconfirmPassword'].hasError('minlength')"
+            >
+              Mật khẩu phải chứa ít nhất 8 kí tự
+            </div>
+          </div>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="form.errors && form.touched"
+          >
+            <div *ngIf="form.hasError('mismatch')">
+              Mật khẩu mới không trùng
+            </div>
+            <div *ngIf="form.hasError('passwordmatcher')">
+              Mật khẩu mới không được trùng với mật khẩu cũ
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button type="submit" class="btn btn-primary btn-block">
+                Đổi mật khẩu
+              </button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.login-box -->
+</div>

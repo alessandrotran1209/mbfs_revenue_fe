@@ -25,10 +25,19 @@ export class MonthAssignmentComponent implements OnInit {
   constructor(public dialog: MatDialog, private httpClient: HttpClient) {}
 
   ngOnInit() {
+    this.branches = [
+      'Hà Nội',
+      'Tp. HCM',
+      'Đà Nẵng',
+      'Đồng Nai',
+      'Hải Phòng',
+      'Cần Thơ',
+      'VAS',
+    ];
     this.ds = [
       { title: 'Trong Mobifone', data: [] },
       { title: 'Ngoài Mobifone', data: [] },
-      { title: 'Đổi mới', data: [] },
+      { title: 'Dự án và các nguồn DT khác', data: [] },
     ];
 
     for (let i = 0; i < this.ds.length; i++) {
@@ -41,6 +50,7 @@ export class MonthAssignmentComponent implements OnInit {
   displayedColumns: string[] = [];
   panelOpenState: Map<number, boolean> = new Map<number, boolean>();
   clickedRows = new Array();
+  branches = [];
 
   openDialog(i: number) {
     const dialogRef = this.dialog.open(AddDialogComponent, {
@@ -99,11 +109,12 @@ export class MonthAssignmentComponent implements OnInit {
     complete_rate: 'Tỉ lệ hoàn thành',
   };
 
-  onFileChange(ev) {
+  onFileChange(ev, i) {
     let workBook = null;
     let jsonData = null;
     const reader = new FileReader();
     const file = ev.target.files[0];
+    const target = this.branches[i];
     reader.onload = (event) => {
       const data = reader.result;
       workBook = XLSX.read(data, { type: 'binary' });
@@ -113,18 +124,21 @@ export class MonthAssignmentComponent implements OnInit {
         return initial;
       }, {});
       const dataString = JSON.stringify(jsonData);
-      console.log(jsonData.Sheet1);
 
-      this.setRevenueTarget(jsonData.Sheet1).subscribe((response) => {
+      this.setRevenueTarget(jsonData.Sheet1, target).subscribe((response) => {
         console.log(response);
       });
     };
     reader.readAsBinaryString(file);
   }
 
-  public setRevenueTarget(data) {
+  getBranch(branch: string) {
+    return `CN. ${branch}`;
+  }
+
+  public setRevenueTarget(data, target) {
     return this.httpClient
-      .post('http://127.0.0.1:8000/insert-excel', data)
+      .post(`http://127.0.0.1:8000/insert-excel?target=${target}`, data)
       .pipe(map((res) => res));
   }
 }

@@ -60,14 +60,13 @@ export class LayoutComponent implements OnInit {
   isLoggedIn = false;
   username?: string;
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorage.getToken();
+    this.isLoggedIn = this.tokenStorage.isAuthenticated();
 
     if (this.isLoggedIn) {
       const user = this.tokenStorage.getUser();
       this.username = user.username;
     }
   }
-  title = 'QLCV';
   treeControl = new NestedTreeControl<FoodNode>((node) => node.children);
   dataSource = new MatTreeNestedDataSource<FoodNode>();
   constructor(
@@ -105,7 +104,7 @@ export class LayoutComponent implements OnInit {
 
   logOut() {
     this.tokenStorage.signOut();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   isAdminOnly(name: any) {
