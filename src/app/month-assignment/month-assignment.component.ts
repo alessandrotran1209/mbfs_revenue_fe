@@ -52,26 +52,26 @@ export class MonthAssignmentComponent implements OnInit {
   clickedRows = new Array();
   branches = [];
 
-  openDialog(i: number) {
+  openDialog(branch: string, i: number) {
     const dialogRef = this.dialog.open(AddDialogComponent, {
-      data: i,
+      data: [branch, i],
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.populateDataFromSource(i);
+      this.populateDataFromSource(branch, i);
     });
   }
 
-  getRevenueData(i: number) {
+  getRevenueData(branch: string, i: number) {
     const revenueSource = new RevenueSource();
     const source = revenueSource.getRevenueSource(i);
     return this.httpClient
-      .get(`${environment.baseUrl}/revenue/q?source=${source}`)
+      .get(`${environment.baseUrl}/revenue/q?branch=${branch}&source=${source}`)
       .pipe(map((res) => res));
   }
 
-  populateDataFromSource(i: number) {
-    this.getRevenueData(i).subscribe((response: any) => {
+  populateDataFromSource(branch: string, i: number) {
+    this.getRevenueData(branch, i).subscribe((response: any) => {
       if (response.data.length == 0) {
         return;
       }
@@ -109,25 +109,33 @@ export class MonthAssignmentComponent implements OnInit {
     complete_rate: 'Tỉ lệ hoàn thành',
   };
 
-  onFileChange(ev, i) {
+  onFileChange(ev) {
     let workBook = null;
     let jsonData = null;
     const reader = new FileReader();
     const file = ev.target.files[0];
-    const target = this.branches[i];
+
     reader.onload = (event) => {
       const data = reader.result;
       workBook = XLSX.read(data, { type: 'binary' });
+      // const ws: XLSX.WorkSheet = workBook.Sheets[target];
       jsonData = workBook.SheetNames.reduce((initial, name) => {
         const sheet = workBook.Sheets[name];
         initial[name] = XLSX.utils.sheet_to_json(sheet);
         return initial;
       }, {});
-      const dataString = JSON.stringify(jsonData);
 
-      this.setRevenueTarget(jsonData.Sheet1, target).subscribe((response) => {
-        console.log(response);
-      });
+      const dataString = JSON.stringify(jsonData);
+      for (const branch of this.branches) {
+        if (jsonData[branch] == undefined) {
+          continue;
+        }
+        this.setRevenueTarget(jsonData[branch], branch).subscribe(
+          (response) => {
+            console.log(response);
+          }
+        );
+      }
     };
     reader.readAsBinaryString(file);
   }
@@ -138,7 +146,7 @@ export class MonthAssignmentComponent implements OnInit {
 
   public setRevenueTarget(data, target) {
     return this.httpClient
-      .post(`http://127.0.0.1:8000/insert-excel?target=${target}`, data)
+      .post(`${environment.baseUrl}/insert-excel?target=${target}`, data)
       .pipe(map((res) => res));
   }
 }

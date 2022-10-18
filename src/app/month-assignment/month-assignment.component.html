@@ -1,21 +1,16 @@
 <h1>GIAO DOANH THU</h1>
+<button mat-raised-button>
+  <input input type="file" (change)="onFileChange($event)" multiple="false" />
+</button>
 <mat-tab-group>
   <mat-tab
     *ngFor="let branch of branches; index as branch_index"
     [label]="getBranch(branch)"
   >
-    <button mat-raised-button>
-      <input
-        input
-        type="file"
-        (change)="onFileChange($event, branch_index)"
-        multiple="false"
-      />
-    </button>
     <div *ngFor="let d of ds; index as i">
       <mat-accordion>
         <mat-expansion-panel
-          (opened)="panelOpenState[i] = true; populateDataFromSource(i)"
+          (opened)="panelOpenState[i] = true; populateDataFromSource(branch, i)"
           (closed)="panelOpenState[i] = false"
         >
           <mat-expansion-panel-header>
@@ -25,7 +20,11 @@
           </mat-panel-description> -->
           </mat-expansion-panel-header>
 
-          <button mat-raised-button color="accent" (click)="openDialog(i)">
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="openDialog(branch, i)"
+          >
             Thêm mới
           </button>
           <table

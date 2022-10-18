@@ -13,7 +13,6 @@ import { WeekReportComponent } from './week-report/week-report.component';
 import { MonthAssignmentComponent } from './month-assignment/month-assignment.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { LayoutModule } from './layout/layout.module';
-import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import { LoginComponent } from './login/login.component';
     WeekReportComponent,
     MonthAssignmentComponent,
     EditDialogComponent,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,

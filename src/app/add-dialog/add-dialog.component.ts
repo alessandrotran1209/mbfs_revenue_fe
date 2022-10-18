@@ -54,13 +54,15 @@ export const MONTH_FORMATS = {
 })
 export class AddDialogComponent implements OnInit {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public index: number,
+    @Inject(MAT_DIALOG_DATA) public data: any[],
     public dialogRef: MatDialogRef<AddDialogComponent>,
     public fb: FormBuilder,
     private httpClient: HttpClient
   ) {}
 
   ngOnInit(): void {
+    this.branch = this.data[0];
+    this.index = this.data[1];
     this.reactiveForm();
     this.date.setValue(moment());
     let dateValue = moment();
@@ -86,6 +88,8 @@ export class AddDialogComponent implements OnInit {
     });
   }
 
+  branch: string;
+  index: number;
   insertForm!: FormGroup;
   date = new FormControl();
   revenueCategoryOptions: string[] = [];
@@ -101,6 +105,7 @@ export class AddDialogComponent implements OnInit {
 
   reactiveForm() {
     this.insertForm = this.fb.group({
+      branch: this.fb.control(this.branch),
       month: this.fb.control('', [Validators.required]),
       revenue_source: this.fb.control('', [Validators.required]),
       revenue_category: this.fb.control(''),

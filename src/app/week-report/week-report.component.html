@@ -1,5 +1,5 @@
 <h1>BÁO CÁO DOANH THU</h1>
-<mat-tab-group>
+<mat-tab-group (selectedTabChange)="onTabChanged($event)">
   <mat-tab
     *ngFor="let branch of branches; index as i"
     [label]="getBranch(branch)"

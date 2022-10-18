@@ -41,11 +41,9 @@ export class TokenStorageService {
 
   public isAuthenticated(): boolean {
     const token = this.getToken();
-    console.log(token, token == 'undefined');
 
     if (token != 'undefined') {
       const isExpired = helper.isTokenExpired(token);
-
       return !isExpired;
     }
     return false;
