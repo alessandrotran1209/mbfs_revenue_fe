@@ -100,6 +100,9 @@ export class WeekReportComponent implements OnInit {
   }
 
   openEditDialog(row: Object, i: number) {
+    if (this.tokenStorage.getUser().username == 'khkd') {
+      return;
+    }
     const revenueSource = new RevenueSource();
     const source = revenueSource.getRevenueSource(i);
     row['revenue_source'] = source;

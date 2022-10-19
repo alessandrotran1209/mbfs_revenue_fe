@@ -78,6 +78,7 @@ export class EditDialogComponent implements OnInit {
     week2: 'Tuần 3',
     week3: 'Tuần 4',
     week4: 'Tuần 5',
+    week5: 'Tuần 6',
     complete_rate: 'Tỉ lệ hoàn thành',
   };
 
