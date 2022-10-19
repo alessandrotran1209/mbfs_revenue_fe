@@ -103,6 +103,7 @@ export class WeekReportComponent implements OnInit {
     const revenueSource = new RevenueSource();
     const source = revenueSource.getRevenueSource(i);
     row['revenue_source'] = source;
+    row['branch'] = this.currentBranch;
     const dialogRef = this.dialog.open(EditDialogComponent, { data: row });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -121,6 +122,7 @@ export class WeekReportComponent implements OnInit {
     week2: 'Tuần 3',
     week3: 'Tuần 4',
     week4: 'Tuần 5',
+    week5: 'Tuần 6',
     complete_rate: 'Tỉ lệ hoàn thành',
   };
 

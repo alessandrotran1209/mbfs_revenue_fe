@@ -83,8 +83,6 @@ export class EditDialogComponent implements OnInit {
 
   public updateWeekRevenue() {
     const insertData = this.insertForm.value;
-    console.log(insertData);
-
     return this.httpClient
       .post(`${environment.baseUrl}/update-week`, insertData)
       .pipe(map((res) => res));
