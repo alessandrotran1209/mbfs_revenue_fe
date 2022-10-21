@@ -1,29 +1,29 @@
 table {
-    width: 100%;
+  width: 100%;
 }
 
 .mat-row .mat-cell {
-    border-bottom: 1px solid transparent;
-    border-top: 1px solid transparent;
-    cursor: pointer;
-  }
-  
-  .mat-row:hover .mat-cell {
-    border-color: currentColor;
-  }
-  
-  .demo-row-is-clicked {
-    font-weight: bold;
-  }
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
 
 .cdk-column-revenue_target,
-.cdk-column-week0,  
-.cdk-column-week1,  
-.cdk-column-week2,  
-.cdk-column-week3,  
+.cdk-column-week0,
+.cdk-column-week1,
+.cdk-column-week2,
+.cdk-column-week3,
 .cdk-column-week4,
-.cdk-column-complete_rate  
-{
-    flex: none;
-    width: 6vw;
+.cdk-column-week5,
+.cdk-column-complete_rate {
+  flex: none;
+  width: 6vw;
 }

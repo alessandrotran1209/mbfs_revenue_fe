@@ -15,6 +15,7 @@ import * as XLSX from 'xlsx';
 type AOA = any[][];
 
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-month-assignment',
@@ -22,7 +23,11 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
   styleUrls: ['./month-assignment.component.scss'],
 })
 export class MonthAssignmentComponent implements OnInit {
-  constructor(public dialog: MatDialog, private httpClient: HttpClient) {}
+  constructor(
+    public dialog: MatDialog,
+    private httpClient: HttpClient,
+    private _tokenStorage: TokenStorageService
+  ) {}
 
   ngOnInit() {
     this.branches = [
@@ -149,5 +154,9 @@ export class MonthAssignmentComponent implements OnInit {
     return this.httpClient
       .post(`${environment.baseUrl}/insert-excel?target=${target}`, data)
       .pipe(map((res) => res));
+  }
+
+  isAssignable() {
+    return !(this._tokenStorage.getUser().username == 'khkd');
   }
 }

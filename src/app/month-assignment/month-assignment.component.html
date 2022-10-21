@@ -1,6 +1,12 @@
 <h1>GIAO DOANH THU</h1>
-<button mat-raised-button>
-  <input input type="file" (change)="onFileChange($event)" multiple="false" />
+<button mat-raised-button [disabled]="isAssignable()">
+  <input
+    input
+    type="file"
+    (change)="onFileChange($event)"
+    multiple="false"
+    [disabled]="isAssignable()"
+  />
 </button>
 <mat-tab-group>
   <mat-tab
