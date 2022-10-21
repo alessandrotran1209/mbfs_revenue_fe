@@ -131,16 +131,24 @@ export class MonthAssignmentComponent implements OnInit {
         return initial;
       }, {});
 
-      const dataString = JSON.stringify(jsonData);
       for (const branch of this.branches) {
         if (jsonData[branch] == undefined) {
           continue;
         }
-        this.setRevenueTarget(jsonData[branch], branch).subscribe(
-          (response) => {
-            console.log(response);
-          }
-        );
+        let insert_data = [];
+        for (let data of jsonData[branch]) {
+          insert_data.push({
+            revenue_source: data['Loại doanh thu'],
+            revenue_category: data['Trạng thái doanh thu'],
+            revenue_subcategory: data['Mảng dịch vụ'],
+            revenue_detail: data['Tên dịch vụ'],
+            value: data['Chỉ tiêu'],
+          });
+        }
+
+        this.setRevenueTarget(insert_data, branch).subscribe((response) => {
+          console.log(response);
+        });
       }
     };
     reader.readAsBinaryString(file);
