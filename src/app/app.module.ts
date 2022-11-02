@@ -13,6 +13,8 @@ import { WeekReportComponent } from './week-report/week-report.component';
 import { MonthAssignmentComponent } from './month-assignment/month-assignment.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { LayoutModule } from './layout/layout.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { LayoutModule } from './layout/layout.module';
     WeekReportComponent,
     MonthAssignmentComponent,
     EditDialogComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ import { LayoutModule } from './layout/layout.module';
     ReactiveFormsModule,
     HttpClientModule,
     LayoutModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
