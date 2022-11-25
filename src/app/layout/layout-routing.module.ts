@@ -16,6 +16,13 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
     ],
   },
+  {
+    path: 'company-revenue',
+    loadChildren: () =>
+      import('../revenue-company/revenue-company.module').then(
+        (m) => m.RevenueCompanyModule
+      ),
+  },
 ];
 
 @NgModule({

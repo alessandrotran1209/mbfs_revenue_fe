@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/kuoyvbkf/repositories/mbfs_station_management_fe
+    - /bin/cp -R images $DEPLOYPATH
