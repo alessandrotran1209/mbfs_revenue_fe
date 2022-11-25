@@ -1,0 +1,50 @@
+<mat-tab-group>
+  <mat-tab label="Biểu đồ">
+    <div class="container py-0 my-0">
+      <div class="chart-container">
+        <div class="chart">
+          <canvas
+            baseChart
+            [data]="pieChartData"
+            [type]="pieChartType"
+            [options]="pieChartOptions"
+            [plugins]="pieChartPlugins"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <div class="container py-0 my-0">
+      <div>
+        <canvas
+          baseChart
+          [data]="revenueLineChartData"
+          [options]="lineChartOptions"
+          [type]="lineChartType"
+        ></canvas>
+      </div>
+
+      <div>
+        <canvas
+          baseChart
+          [data]="profitLineChartData"
+          [options]="lineChartOptions"
+          [type]="lineChartType"
+        ></canvas>
+      </div>
+    </div>
+
+    <div class="container py-0 my-0">
+      <app-barchart type="customerservice"></app-barchart>
+    </div>
+
+    <div class="container py-0 my-0">
+      <app-barchart type="infra"></app-barchart>
+    </div>
+
+    <div class="container py-0 my-0">
+      <app-barchart type="added-value"></app-barchart>
+    </div>
+  </mat-tab>
+  <mat-tab label="Số liệu"> </mat-tab>
+</mat-tab-group>

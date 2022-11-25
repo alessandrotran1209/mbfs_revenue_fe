@@ -19,36 +19,51 @@ interface FoodNode {
 
 const TREE_DATA: FoodNode[] = [
   {
+    name: 'Báo cáo doanh thu',
+    icon: 'home',
+    is_active: false,
+    route: '/week',
+    children: [
+      {
+        name: 'Doanh thu toàn công ty',
+        icon: 'assignment',
+        is_active: false,
+        children: [
+          {
+            name: 'Doanh thu lũy kế',
+            icon: 'person',
+            is_active: false,
+            route: '/company-revenue/accumulated',
+          },
+          {
+            name: 'Doanh thu tháng',
+            icon: 'text_snippet',
+            is_active: false,
+            route: '/report/overview',
+          },
+          {
+            name: 'Doanh thu tuần',
+            icon: 'text_snippet',
+            is_active: false,
+            route: '/report/overview',
+          },
+        ],
+      },
+      {
+        name: 'Doanh thu chi nhánh',
+        icon: 'home',
+        is_active: false,
+        route: '/week',
+        children: [],
+      },
+    ],
+  },
+  {
     name: 'Giao doanh thu',
     icon: 'dashboard',
     is_active: false,
     route: '/month',
   },
-  {
-    name: 'Báo cáo doanh thu',
-    icon: 'home',
-    is_active: false,
-    route: '/week',
-  },
-  // {
-  //   name: 'Báo cáo',
-  //   icon: 'assignment',
-  //   is_active: false,
-  //   children: [
-  //     {
-  //       name: 'Báo cáo NVVH',
-  //       icon: 'person',
-  //       is_active: false,
-  //       route: '/report/operator',
-  //     },
-  //     {
-  //       name: 'Báo cáo chi tiết',
-  //       icon: 'text_snippet',
-  //       is_active: false,
-  //       route: '/report/overview',
-  //     },
-  //   ],
-  // },
 ];
 @Component({
   selector: 'app-layout',
