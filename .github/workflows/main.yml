@@ -25,3 +25,6 @@ jobs:
         username: kuoyvbkf
         password: 4f0Hbq(57b(KNN
         port: 21
+        server-dir: repositories/mbfs_station_management_fe/
+        dry-run: true
+        log-level: standard
